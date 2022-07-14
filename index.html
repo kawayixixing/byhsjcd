@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+		position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+	  
+	  .marker {
+		 background-image: url('Mario.ico');
+		 background-size: cover;
+		 width: 50px;
+		 height: 50px;
+		 border-radius: 50%;
+		 cursor: pointer;
+	  }
+	  
+	  .mapboxgl-popup {
+		max-width: 200px;
+	  }
+
+	  .mapboxgl-popup-content {
+		text-align: center;
+		font-family: 'Open Sans', sans-serif;
+	  }
+	  
+	  
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZnJlaGVpdCIsImEiOiJja2xyaGVncGIwNDFuMm9qeXE4cnpqN2lqIn0.UWmJWcSC7AQ6YJOa2eQWlA';
+
+var map = new mapboxgl.Map({
+  container: 'map',
+  
+  //核酸样式地图
+  style: 'mapbox://styles/freheit/cl5l0znmd000214msf2eik9gp',
+
+  
+  //地图中心位置-经纬度
+  center: [104.136, 36.5450],
+  //视图缩放等级min：0，max：20
+  zoom: 10
+});
+
+// code from the next step will go here!
+//在mapbox中添加自定义标记
+//Load GeoJSON data，加载地理信息json数据
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.176964,
+          36.545352
+        ]
+    },
+    properties: {
+      title: '全民健身广场采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.392543,
+          36.434051
+        ]
+    },
+    properties: {
+      title: '四龙镇中心卫生医院院内采样点',
+      description: '08:00-12:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.171612,
+          36.550475
+        ]
+    },
+    properties: {
+      title: '白银市第一人民医院门口采样点',
+      description: '24小时'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.172776,
+          36.541457
+        ]
+    },
+    properties: {
+      title: '白银市第二人民医院南门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.18216,
+          36.546392
+        ]
+    },
+    properties: {
+      title: '金鱼公园东门采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.15724,
+          36.545619
+        ]
+    },
+    properties: {
+      title: '白银区妇幼保健院院门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.162442,
+          36.549648
+        ]
+    },
+    properties: {
+      title: '工农路街道社区卫生服务中心门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.174187,
+          36.542712
+        ]
+    },
+    properties: {
+      title: '白银市第二人民医院门口采样点',
+      description: '24小时'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.141887,
+          36.550074
+        ]
+    },
+    properties: {
+      title: '纺织路黄茂井村委会门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.247931,
+          36.368061
+        ]
+    },
+    properties: {
+      title: '水川中心卫生院院内采样点',
+      description: '08:00-12:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.139063,
+          36.542999
+        ]
+    },
+    properties: {
+      title: '国芳百盛后门采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates:  [
+          104.178401,
+          36.525272
+        ]
+    },
+    properties: {
+      title: '高新产业园广场采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.180955,
+          36.555115
+        ]
+    },
+    properties: {
+      title: '四龙路街道社区卫生服务中心门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.121835,
+          36.544092
+        ]
+    },
+    properties: {
+      title: '武川小区采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.179057,
+          36.537125
+        ]
+    },
+    properties: {
+      title: '原钢窗厂院内采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.131767,
+          36.539905
+        ]
+    },
+    properties: {
+      title: '白银市中西医结合医院门口采样点',
+      description: '24小时'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates:  [
+          104.167015,
+          36.538909
+        ]
+    },
+    properties: {
+      title: '工农路二十冶小区西门口停车场采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.151686,
+          36.53599
+        ]
+    },
+    properties: {
+      title: '白银区妇幼保健院站门口采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.126925,
+          36.509887
+        ]
+    },
+    properties: {
+      title: '银馨社区卫生服务中心后院采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [
+          104.134755,
+          36.548272
+        ]
+    },
+    properties: {
+      title: '新天地文化街停车场采样点',
+      description: '08:00-12:00；15:00-21:00'
+    }
+  },
+]
+};
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+	.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups增加弹出窗口
+		.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+    .addTo(map);
+});
+
+
+</script>
+
+</body>
+</html>
